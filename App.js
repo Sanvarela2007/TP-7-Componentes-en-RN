@@ -1,9 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, ImageBackground, TouchableOpacity, Image, Pressable} from 'react-native';
+import { useState } from 'react';
 const ImagenFondo = {uri: 'https://i.pinimg.com/736x/89/3b/52/893b52dc9efa9306b40394ed3206e574.jpg'}
 const FotoPerfilSantiago = {uri: 'https://cdn-icons-png.flaticon.com/512/1785/1785911.png'}
+
 export default function App() {
+  const [mensaje, setMensaje] = useState('');
+
   return (
+    
   <SafeAreaView style={styles.container} >
     <StatusBar style="auto"/> 
     <ImageBackground source={ImagenFondo} style={styles.backgroundImage}>
@@ -13,11 +18,11 @@ export default function App() {
           <Text style={styles.nombretexto}>Santiago Varela</Text>
           <Text style={styles.titulotexto}>Desarrollador Web</Text>
         </View>
-        <TextInput style={styles.input} placeholder="Ingrese un mensaje..." keyboardType="default"/>
+        <TextInput style={styles.input} placeholder="Ingrese un mensaje..." keyboardType="default" value={mensaje} onChangeText={setMensaje}/>
         <View style={styles.botones}>
-          <TouchableOpacity style={styles.boton}><Text style={styles.textoboton}>Contactar</Text></TouchableOpacity>
-          <Pressable style={styles.boton} onPress={() => alert('Abriendo portfolio...')}><Text style={styles.textoboton}>Ver Portfolio</Text></Pressable>
-        </View>
+          <TouchableOpacity style={styles.boton} onPress={() => alert(`Mensaje: ${mensaje}`)}><Text style={styles.textoboton}>Contactar</Text></TouchableOpacity>
+          <Pressable style={({ pressed }) => [styles.boton,{ backgroundColor: pressed ? 'red' : '#163fad' }]}onPress={() => alert('Abriendo portfolio...')}><Text style={styles.textoboton}>Ver Portfolio</Text></Pressable>
+          </View>
       </View>
     </ImageBackground>
   </SafeAreaView>
